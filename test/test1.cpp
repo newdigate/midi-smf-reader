@@ -1,8 +1,6 @@
 //
 // Created by Moolet on 31/12/2020.
 //
-#ifndef TEENSY_RESAMPLING_SDREADER_READERTESTS_CPP
-#define TEENSY_RESAMPLING_SDREADER_READERTESTS_CPP
 #include <SD.h>
 
 #define BOOST_TEST_MODULE ResamplingReaderTests
@@ -27,5 +25,3 @@ BOOST_AUTO_TEST_SUITE(basic_arduino_test)
     }
 
 BOOST_AUTO_TEST_SUITE_END()
-
-#endif //TEENSY_RESAMPLING_SDREADER_READERTESTS_CPP
