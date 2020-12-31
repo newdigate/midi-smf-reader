@@ -4,9 +4,14 @@ project(midi_smf_reader_test CXX)
 find_package(teensy_x86_stubs)
 include_directories(${teensy_x86_stubs_INCLUDE_DIR})
 
+set (Boost_USE_STATIC_LIBS OFF)
+find_package (Boost REQUIRED COMPONENTS unit_test_framework)
+include_directories (${Boost_INCLUDE_DIRS})
+
 include_directories(../src)
 
 add_executable(midi_smf_reader_test
-        runtests.cpp)
+        test1.cpp default_test_fixture.h)
 
 target_link_libraries(midi_smf_reader_test ${teensy_x86_stubs_LIBS})
+target_link_libraries(midi_smf_reader_test ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
