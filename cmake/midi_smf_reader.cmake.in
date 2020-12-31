@@ -1,0 +1,9 @@
+set(midi_smf_reader_VERSION "@midi_smf_reader_VERSION@")
+set(midi_smf_reader_LIBS midi_smf_reader -L${midi_smf_reader_LIB_DIR})
+
+@PACKAGE_INIT@
+
+set_and_check(midi_smf_reader_INCLUDE_DIR "@INCLUDE_INSTALL_DIR@")
+set_and_check(midi_smf_reader_LIB_DIR "@LIB_INSTALL_DIR@")
+
+check_required_components(midi_smf_reader)

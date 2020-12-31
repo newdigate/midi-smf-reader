@@ -1,4 +1,4 @@
-set(MANIFEST "${CMAKE_CURRENT_BINARY_DIR}/install_manifest.txt")
+set(MANIFEST "${CMAKE_CURRENT_BINARY_DIR}/../install_manifest.txt")
 
 if(NOT EXISTS ${MANIFEST})
     message(FATAL_ERROR "Cannot find install manifest: '${MANIFEST}'")
