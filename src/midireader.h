@@ -1,8 +1,8 @@
 //
 // Created by Nicholas Newdigate on 10/04/2018.
 //
-#ifndef TEENSYQUENCER_COMMON_MIDIREADER_H
-#define TEENSYQUENCER_COMMON_MIDIREADER_H
+#ifndef MIDISMFREADER_COMMON_MIDIREADER_H
+#define MIDISMFREADER_COMMON_MIDIREADER_H
 
 #include <vector>
 #include <functional>
@@ -60,4 +60,4 @@ private:
 };
 
 
-#endif //TEENSYQUENCER_COMMON_MIDIREADER_H
+#endif //MIDISMFREADER_COMMON_MIDIREADER_H
