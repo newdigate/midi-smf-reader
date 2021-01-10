@@ -41,18 +41,28 @@ BOOST_AUTO_TEST_SUITE(basic_arduino_test)
 
         midireader reader;
         reader.open("1234.mid");
-
+        int totalNumNotesRead = 0;
         for (int t = 0; t < reader.getNumTracks(); t++)
         {
             reader.setTrackNumber(t);
             midimessage midiMessage;
+            int i = 0;
             while (reader.read(midiMessage)) {
-                std::cout << midiMessage.delta_ticks << std::endl;
+                printf("[%2d,%4d]: delta: %3d\t\tstatus: %3d\t\tkey: %3d\t\tvelocity: %3d\t\tchannel: %2d\t\n",
+                       t,
+                       i,
+                       midiMessage.delta_ticks,
+                       midiMessage.status,
+                       midiMessage.key,
+                       midiMessage.velocity,
+                       midiMessage.channel);
+                i++;
             }
+            totalNumNotesRead += i;
         }
 
-//        BOOST_CHECK_EQUAL(bytesRead, 24);
-//        BOOST_CHECK_EQUAL(*output, *midi_monophonic_mid);
+        BOOST_CHECK_EQUAL(reader.getNumTracks(), 1);
+        BOOST_CHECK_EQUAL(totalNumNotesRead, 32);
     }
 
 
