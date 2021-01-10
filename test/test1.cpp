@@ -3,12 +3,12 @@
 //
 #include <SD.h>
 
-#define BOOST_TEST_MODULE ResamplingReaderTests
+#define BOOST_TEST_MODULE BasicArduinoTests
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 #include "default_test_fixture.h"
 
-BOOST_AUTO_TEST_SUITE(basic_arduino_test)
+BOOST_AUTO_TEST_SUITE(basic_midi_read_test)
 
     BOOST_FIXTURE_TEST_CASE(can_mock_arduino_SD_contents, DefaultTestFixture) {
 

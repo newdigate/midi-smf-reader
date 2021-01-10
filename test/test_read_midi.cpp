@@ -6,8 +6,9 @@
 #include <boost/test/unit_test.hpp>
 #include "default_test_fixture.h"
 #include "midireader.h"
-
-BOOST_AUTO_TEST_SUITE(basic_arduino_test)
+#define BOOST_TEST_MODULE MidiReaderTests
+#define BOOST_TEST_DYN_LINK
+BOOST_AUTO_TEST_SUITE(basic_midi_read_test)
 
     unsigned int midi_monophonic_len = 255;
     unsigned char midi_monophonic_mid[] = {
