@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.5)
-project(midi_smf_reader_src C CXX)
 
 set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include/midi_smf_reader/)
 set(LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib/midi_smf_reader )
@@ -13,9 +12,9 @@ set(SOURCE_FILES
 set(HEADER_FILES
         midireader.h)
 
-add_library(midi_smf_reader_src STATIC ${HEADER_FILES} ${SOURCE_FILES})
+add_library(midi_smf_reader STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
-set_target_properties(midi_smf_reader_src PROPERTIES PUBLIC_HEADER "midireader.h")
+set_target_properties(midi_smf_reader PROPERTIES PUBLIC_HEADER "midireader.h")
 
 include(CMakePackageConfigHelpers)
 configure_package_config_file(../cmake/midi_smf_reader.cmake.in
@@ -28,7 +27,7 @@ write_basic_package_version_file(
         VERSION ${midi_smf_reader_VERSION}
         COMPATIBILITY SameMajorVersion )
 
-install(TARGETS midi_smf_reader_src DESTINATION
+install(TARGETS midi_smf_reader DESTINATION
         LIBRARY DESTINATION ${LIB_INSTALL_DIR}
         ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
         PUBLIC_HEADER DESTINATION "include/midi_smf_reader"

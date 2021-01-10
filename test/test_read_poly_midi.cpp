@@ -2297,7 +2297,7 @@ BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
         }
 
         BOOST_CHECK_EQUAL(reader.getNumTracks(), 1);
-        BOOST_CHECK_EQUAL(totalNumNotesRead, 6729);
+        BOOST_CHECK_EQUAL(totalNumNotesRead, 6730);
     }
 
 BOOST_AUTO_TEST_SUITE_END()
