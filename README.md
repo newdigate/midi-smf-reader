@@ -43,3 +43,19 @@ simple c++ smf midi file reader targeting teensy cores
             totalNumNotesRead += i;
         }
 ```
+
+
+## package installation:
+``` sh
+git clone https://github.com/newdigate/teensy-x86-stubs.git
+cd teensy-x86-stubs
+mkdir cmake-build-debug
+cd cmake-build-debug
+cmake ..
+sudo make install
+```
+
+### uninstall:
+``` sh
+sudo make uninstall
+```
