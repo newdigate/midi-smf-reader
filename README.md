@@ -47,8 +47,8 @@ simple c++ smf midi file reader targeting teensy cores
 
 ## package installation:
 ``` sh
-git clone https://github.com/newdigate/teensy-x86-stubs.git
-cd teensy-x86-stubs
+git clone https://github.com/newdigate/midi-smf-reader.git
+cd midi-smf-reader
 mkdir cmake-build-debug
 cd cmake-build-debug
 cmake ..
