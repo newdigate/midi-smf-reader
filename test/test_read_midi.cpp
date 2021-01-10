@@ -35,22 +35,33 @@ BOOST_AUTO_TEST_SUITE(basic_arduino_test)
             0xff, 0x2f, 0x00
     };
 
+
+
     BOOST_FIXTURE_TEST_CASE(can_read_basic_midi_file, DefaultTestFixture) {
 
         SD.setSDCardFileData(reinterpret_cast<char *>(midi_monophonic_mid), midi_monophonic_len);
 
         midireader reader;
         reader.open("1234.mid");
+
+        double microsPerTick = reader.get_microseconds_per_tick();
+
         int totalNumNotesRead = 0;
         for (int t = 0; t < reader.getNumTracks(); t++)
         {
             reader.setTrackNumber(t);
-            midimessage midiMessage;
+            midimessage midiMessage{};
             int i = 0;
+            long totalTicks = 0;
+            long microseconds = 0;
             while (reader.read(midiMessage)) {
-                printf("[%2d,%4d]: delta: %3d\t\tstatus: %3d\t\tkey: %3d\t\tvelocity: %3d\t\tchannel: %2d\t\n",
+                totalTicks += midiMessage.delta_ticks;
+                microseconds += microsPerTick * midiMessage.delta_ticks;
+                printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tkey: %3d\tvelocity: %3d\tchannel: %2d\t\n",
+                       microseconds/1000,
                        t,
                        i,
+                       totalTicks,
                        midiMessage.delta_ticks,
                        midiMessage.status,
                        midiMessage.key,
