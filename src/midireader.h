@@ -52,9 +52,7 @@ public:
     }
 
     unsigned int get_microseconds_per_tick() {
-        double micros_per_beat = 60000000.0 / _currentBPM;
-        unsigned int micros_per_tick = micros_per_beat / 480;
-        return micros_per_tick;
+        return get_microseconds_per_tick(_currentBPM) ;
     }
 private:
     bool _initialized;
