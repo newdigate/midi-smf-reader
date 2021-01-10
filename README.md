@@ -59,3 +59,15 @@ sudo make install
 ``` sh
 sudo make uninstall
 ```
+
+## credits
+##### Don't Run Unit Tests on the Arduino Device or Emulator
+* [stackoverflow 11437456](https://stackoverflow.com/a/11437456)
+* includes code from [IronSavior/dsm2_tx](https://github.com/IronSavior/dsm2_tx)
+
+##### cmake uninstaller
+*  [gist.github.com/royvandam/3033428](https://gist.github.com/royvandam/3033428)
+
+
+## license
+Unless specified in source code file, all code is MIT license.
