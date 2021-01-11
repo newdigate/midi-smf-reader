@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: newdigate/teensy-x86-stubs
+          token: ${{ secrets.GitHub_PAT }} # `GitHub_PAT` is a secret that contains your PAT
           path: ./deps/teensy-x86-stubs
           fetch-depth: 1
           ref: master
