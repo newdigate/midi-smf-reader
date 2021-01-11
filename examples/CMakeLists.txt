@@ -137,10 +137,7 @@ macro(import_arduino_library LIB_ROOT LIB_NAME)
     endforeach(SOURCE_S ${SOURCES_S})
 
 endmacro(import_arduino_library)
-set(ARDUINO_LIB_ROOT "${DEPSPATH}/")
+set(ARDUINO_LIB_ROOT "${DEPSPATH}")
 import_arduino_library(${ARDUINO_LIB_ROOT} SPI)
 import_arduino_library(${ARDUINO_LIB_ROOT} SD)
-import_arduino_library(${ARDUINO_LIB_ROOT} SD/utility)
-
-add_subdirectory(basic)
 
