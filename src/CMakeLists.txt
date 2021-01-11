@@ -43,6 +43,9 @@ install(FILES
 # Add uninstall target
 # Requirements: Copy the uninstall.cmake file to the appropriate CMAKE_MODULE_PATH.
 #
+set(CMAKE_VERBOSE_MAKEFILE 1)
+add_custom_target(installarduino
+        "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/install_arduino_library.cmake")
+
 add_custom_target(uninstall
         "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/uninstall.cmake")
-set(CMAKE_VERBOSE_MAKEFILE 1)
