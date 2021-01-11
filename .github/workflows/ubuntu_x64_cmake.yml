@@ -17,12 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           repository: newdigate/teensy-x86-stubs
           path: ../deps/teensy-x86-stubs
-          fetch-depth: 1
-          ref: master
 
       - name: Make and Install Dependencies
         run: cd ../deps/teensy-x86-stubs && mkdir cmake-build-$BUILD_TYPE && cd cmake-build-$BUILD_TYPE && cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE .. && sudo make install
