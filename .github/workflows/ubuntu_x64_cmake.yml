@@ -20,7 +20,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: newdigate/teensy-x86-stubs
-          token: ${{ secrets.ACCESS_TOKEN }} 
           path: ./deps/teensy-x86-stubs
           fetch-depth: 1
           ref: master
