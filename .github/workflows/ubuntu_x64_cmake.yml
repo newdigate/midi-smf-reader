@@ -61,4 +61,4 @@ jobs:
         working-directory: ${{github.workspace}}/build
         shell: bash
         # Execute the build.  You can specify a specific target with "--target <NAME>"
-        run: ./midi_smf_reader_test
+        run: test/midi_smf_reader_test
