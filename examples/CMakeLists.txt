@@ -103,12 +103,12 @@ endfunction()
 macro(import_arduino_library LIB_ROOT LIB_NAME)
     # Check if we can find the library.
     if(NOT EXISTS ${LIB_ROOT})
-        message(FATAL_ERROR "Could not find the Arduino library directory")
+        message(FATAL_ERROR "Could not find the Arduino library directory ${LIB_ROOT}")
     endif(NOT EXISTS ${LIB_ROOT})
     set(LIB_DIR "${LIB_ROOT}/${LIB_NAME}")
     #message(LIB_DIR ${LIB_DIR})
     if(NOT EXISTS "${LIB_DIR}")
-        message(FATAL_ERROR "Could not find the directory for library '${LIB_NAME}'")
+        message(FATAL_ERROR "Could not find the directory for library '${LIB_DIR}'")
     endif(NOT EXISTS "${LIB_DIR}")
 
     # Add it to the include path.
