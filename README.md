@@ -4,7 +4,7 @@
 [![Ubuntu-x64](https://github.com/newdigate/midi-smf-reader/workflows/Ubuntu-x64/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3Ateensy40)
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3AUbuntu-x64)
 
-simple c++ smf midi file reader targeting teensy cores 
+simple c++ smf midi file reader targeting linux and teensy cores 
   
 ## basic usage:
 ``` c++
