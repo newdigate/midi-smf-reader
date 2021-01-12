@@ -5,22 +5,6 @@
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3AUbuntu-x64)
 
 simple c++ smf midi file reader targeting teensy cores 
-
-## dependencies:
-* src
-  * [PaulStoffregen/cores](https://github.com/PaulStoffregen)
-  * [greiman/SdFat](https://github.com/greiman/SdFat)
-  * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
-  * [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI)
-  * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
-      
-* tests
-  * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs)
-  * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
- ``` sh
-        sudo apt-get update && sudo apt-get install -yq libboost-test-dev
- ```
-
   
 ## basic usage:
 ``` c++
@@ -55,6 +39,21 @@ simple c++ smf midi file reader targeting teensy cores
             totalNumNotesRead += i;
         }
 ```
+
+## dependencies:
+* src
+  * [PaulStoffregen/cores](https://github.com/PaulStoffregen)
+  * [greiman/SdFat](https://github.com/greiman/SdFat)
+  * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
+  * [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI)
+  * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
+      
+* tests
+  * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs)
+  * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
+ ``` sh
+        sudo apt-get update && sudo apt-get install -yq libboost-test-dev
+ ```
 
 ## compile example for teensy:
 * update COMPILERPATH, DEPSPATH in examples/CMakeLists.txt:
