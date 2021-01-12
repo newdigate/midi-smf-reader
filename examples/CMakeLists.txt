@@ -139,6 +139,6 @@ endmacro(import_arduino_library)
 
 set(ARDUINO_LIB_ROOT "${DEPSPATH}")
 import_arduino_library(${ARDUINO_LIB_ROOT} SPI)
-import_arduino_library(${ARDUINO_LIB_ROOT} SDFat/src)
+import_arduino_library(${ARDUINO_LIB_ROOT} SdFat/src)
 import_arduino_library(${ARDUINO_LIB_ROOT} SD/src)
 
