@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: teensy40
 
 on: [push]
 
