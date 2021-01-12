@@ -23,6 +23,12 @@ jobs:
         fetch-depth: 1
         ref: master
 
+    - name: ls deps/SD
+      run: |
+        ls -lrt deps/
+        ls -lrt deps/SD/
+        ls -lrt deps/SD/src/
+
     - uses: actions/checkout@v2
       with:
         repository: greiman/SdFat.git
