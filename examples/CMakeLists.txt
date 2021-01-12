@@ -49,7 +49,6 @@ file(GLOB TEENSY_CPP_FILES ${COREPATH}*.cpp)
 set(TEENSY_SOURCES ${TEENSY_C_FILES} ${TEENSY_CPP_FILES})
 list(REMOVE_ITEM TEENSY_SOURCES ${COREPATH}main.cpp)
 
-
 # Teensy 3.0 and 3.1 differentiation
 #
 message("TEENSY_VERSION ${TEENSY_VERSION}")
@@ -118,17 +117,17 @@ macro(import_arduino_library LIB_ROOT LIB_NAME)
     message("include_directories " ${LIB_DIR} "  - " ${INCLUDE_DIRECTORIES})
 
     # Mark source files to be built along with the sketch code.
-    file(GLOB SOURCES_CPP ABSOLUTE "${LIB_DIR}/*.cpp")
+    file(GLOB_RECURSE SOURCES_CPP ABSOLUTE "${LIB_DIR}/*.cpp")
     foreach(SOURCE_CPP ${SOURCES_CPP})
         set(TEENSY_LIB_SOURCES ${TEENSY_LIB_SOURCES} ${SOURCE_CPP})
     endforeach(SOURCE_CPP ${SOURCES_CPP})
-    file(GLOB SOURCES_C ABSOLUTE "${LIB_DIR}/*.c")
+    file(GLOB_RECURSE SOURCES_C ABSOLUTE "${LIB_DIR}/*.c")
     foreach(SOURCE_C ${SOURCES_C})
         set(TEENSY_LIB_SOURCES ${TEENSY_LIB_SOURCES} ${SOURCE_C})
         message("lib src ${TEENSY_LIB_SOURCES}")
     endforeach(SOURCE_C ${SOURCES_C})
 
-    file(GLOB SOURCES_S ABSOLUTE "${LIB_DIR}/*.S")
+    file(GLOB_RECURSE SOURCES_S ABSOLUTE "${LIB_DIR}/*.S")
     foreach(SOURCE_S ${SOURCES_S})
         set_property(SOURCE ${SOURCE_S} PROPERTY LANGUAGE C)
         set_source_files_properties(${SOURCE_S} PROPERTIES COMPILE_FLAGS "-x assembler-with-cpp")
@@ -137,7 +136,9 @@ macro(import_arduino_library LIB_ROOT LIB_NAME)
     endforeach(SOURCE_S ${SOURCES_S})
 
 endmacro(import_arduino_library)
+
 set(ARDUINO_LIB_ROOT "${DEPSPATH}")
 import_arduino_library(${ARDUINO_LIB_ROOT} SPI)
-import_arduino_library(${ARDUINO_LIB_ROOT} SD)
+import_arduino_library(${ARDUINO_LIB_ROOT} SDFat/src)
+import_arduino_library(${ARDUINO_LIB_ROOT} SD/src)
 
