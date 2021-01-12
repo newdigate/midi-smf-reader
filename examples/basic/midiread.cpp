@@ -2,5 +2,5 @@
 #include <SD.h>
 
 int main() {
-
+  Serial.print("hello world");
 }

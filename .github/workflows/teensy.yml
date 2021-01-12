@@ -21,13 +21,7 @@ jobs:
         repository: PaulStoffregen/SD.git
         path: deps/SD
         fetch-depth: 1
-        ref: master
-
-    - name: ls deps/SD
-      run: |
-        ls -lrt deps/
-        ls -lrt deps/SD/
-        ls -lrt deps/SD/src/
+        ref: Juse_Use_SdFat
 
     - uses: actions/checkout@v2
       with:
