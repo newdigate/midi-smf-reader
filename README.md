@@ -20,6 +20,21 @@ simple c++ smf midi file reader targeting teensy cores
  ``` sh
         sudo apt-get update && sudo apt-get install -yq libboost-test-dev
  ```
+## compile example for teensy:
+* update COMPILERPATH, DEPSPATH in examples/CMakeLists.txt:
+``` cmake
+set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
+set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
+set(COREPATH "${DEPSPATH}/cores/teensy4/")   
+```
+* 
+``` sh
+cd examples/basic
+mkdir cmake-build-debug
+cd cmake-build-debug
+cmake .. 
+```
+  
 ## todo:
 * read tempo / key changes
 
