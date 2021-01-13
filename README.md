@@ -62,7 +62,32 @@ for (int t = 0; t < reader.getNumTracks(); t++)
     ``` sh
     sudo apt-get update && sudo apt-get install -yq libboost-test-dev
     ```
-
+## compile and install on linux      
+* clone:
+  ``` sh
+  git clone https://github.com/newdigate/midi-smf-reader.git
+  cd midi-smf-reader
+  ```
+* compile example for linux:
+  ``` sh
+  mkdir cmake-build-debug
+  cd cmake-build-debug
+  cmake ..
+  make
+  ```
+* run tests
+  ``` sh
+  test/midi_smf_reader_test
+  ```
+* install library for linux: 
+  ``` sh
+  sudo make install
+  ```
+* uninstall library for linux: 
+  ``` sh
+  sudo make uninstall
+  ```
+  
 ## compile example for teensy:
 * download [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
 * clone src dependencies into a directory (in this case `/Users/me/git`)
