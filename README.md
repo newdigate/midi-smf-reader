@@ -50,10 +50,18 @@ for (int t = 0; t < reader.getNumTracks(); t++)
       
 * tests (`amd64 arch`)
   * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs)
+    ``` sh
+    git clone https://github.com/newdigate/teensy-x86-stubs.git
+    cd teensy-x86-stubs
+    mkdir cmake-build-debug
+    cd cmake-build-debug
+    cmake ..
+    sudo make install
+    ```
   * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
- ``` sh
-        sudo apt-get update && sudo apt-get install -yq libboost-test-dev
- ```
+    ``` sh
+    sudo apt-get update && sudo apt-get install -yq libboost-test-dev
+    ```
 
 ## compile example for teensy:
 * download [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
