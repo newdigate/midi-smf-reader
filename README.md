@@ -41,14 +41,14 @@ for (int t = 0; t < reader.getNumTracks(); t++)
 ```
 
 ## dependencies:
-* src
+* src (`32bit arm cortex m7 thumb arch`)  
   * [PaulStoffregen/cores](https://github.com/PaulStoffregen/cores)
   * [greiman/SdFat](https://github.com/greiman/SdFat)
   * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
   * [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI)
   * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
       
-* tests
+* tests (`amd64 arch`)
   * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs)
   * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
  ``` sh
