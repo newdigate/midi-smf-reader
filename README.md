@@ -5,6 +5,14 @@
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3Ateensy40)
 
 simple c++ smf midi file reader targeting linux (`amd64 arch`) and teensy (`32bit arm cortex m7 thumb arch`)  
+
+* [usage](#usage)
+* [dependencies](#dependencies)
+* [compile and install on linux](#compile-and-install-on-linux)
+* [compile example for teensy](#compile-example-for-teensy)
+* [todo](#todo)
+* [credits](#credits)
+* [license](#license)
   
 ## usage:
 ``` c++
