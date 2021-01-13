@@ -57,7 +57,7 @@ for (int t = 0; t < reader.getNumTracks(); t++)
 
 ## compile example for teensy:
 * download [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
-* clone src dependencies into a directory (in this case '/Users/me/git')
+* clone src dependencies into a directory (in this case `/Users/me/git`)
 ``` sh
 mkdir /Users/me/git
 cd /Users/me/git
@@ -67,7 +67,7 @@ git clone -b Juse_Use_SdFat https://github.com/PaulStoffregen/SD
 git clone https://github.com/PaulStoffregen/SPI
 ```
 
-* update COMPILERPATH, DEPSPATH in examples/CMakeLists.txt:
+* update COMPILERPATH, DEPSPATH in `examples/CMakeLists.txt:`
 ``` cmake
 set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
 set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
