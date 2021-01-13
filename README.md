@@ -67,7 +67,7 @@ git clone -b Juse_Use_SdFat https://github.com/PaulStoffregen/SD
 git clone https://github.com/PaulStoffregen/SPI
 ```
 
-* update COMPILERPATH, DEPSPATH in `examples/CMakeLists.txt:`
+* update COMPILERPATH, DEPSPATH in `examples/CMakeLists.include.txt:`
 ``` cmake
 set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
 set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
