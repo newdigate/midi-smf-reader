@@ -1,7 +1,13 @@
 name: teensy40
 
-on: [push]
-
+on:
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - 'test/**'
+      - '.github/workflows/ubuntu_x64_cmake.yml'
 jobs:
   build:
 
