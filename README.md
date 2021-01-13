@@ -29,16 +29,8 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
     while (reader.read(midiMessage)) {
         totalTicks += midiMessage.delta_ticks;
         microseconds += microsPerTick * midiMessage.delta_ticks;
-        printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tkey: %3d\tvelocity: %3d\tchannel: %2d\t\n",
-               microseconds/1000,
-               t,
-               i,
-               totalTicks,
-               midiMessage.delta_ticks,
-               midiMessage.status,
-               midiMessage.key,
-               midiMessage.velocity,
-               midiMessage.channel);
+        printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tkey: %3d\tvelocity: %3d\tchannel: %2d\t\n", microseconds/1000, t, i, totalTicks, 
+                midiMessage.delta_ticks, midiMessage.status, midiMessage.key, midiMessage.velocity, midiMessage.channel);
         i++;
     }
     totalNumNotesRead += i;
@@ -105,7 +97,7 @@ git clone -b Juse_Use_SdFat https://github.com/PaulStoffregen/SD
 git clone https://github.com/PaulStoffregen/SPI
 ```
 
-* update COMPILERPATH, DEPSPATH in `examples/CMakeLists.include.txt:`
+* update *COMPILERPATH*, *DEPSPATH* in `examples/CMakeLists.include.txt:`
 ``` cmake
 set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
 set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
