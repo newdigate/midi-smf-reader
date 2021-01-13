@@ -104,7 +104,6 @@ git clone https://github.com/PaulStoffregen/SPI
 ``` cmake
 set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
 set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
-set(COREPATH "${DEPSPATH}/cores/teensy4/")   
 ```
 
 * run these commands in a terminal from the root repository directory
