@@ -114,21 +114,6 @@ cd cmake-build-debug
 cmake .. 
 ```
 
-## package installation:
-``` sh
-git clone https://github.com/newdigate/midi-smf-reader.git
-cd midi-smf-reader
-mkdir cmake-build-debug
-cd cmake-build-debug
-cmake ..
-sudo make install
-```
-
-### uninstall:
-``` sh
-sudo make uninstall
-```
-
 ## todo:
 * read tempo / key changes
 
@@ -139,7 +124,6 @@ sudo make uninstall
 
 ##### cmake uninstaller
 *  [gist.github.com/royvandam/3033428](https://gist.github.com/royvandam/3033428)
-
 
 ## license
 Unless specified in source code file, all code is MIT license.
