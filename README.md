@@ -4,7 +4,7 @@
 [![Ubuntu-x64](https://github.com/newdigate/midi-smf-reader/workflows/Ubuntu-x64/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3AUbuntu-x64)
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3Ateensy40)
 
-simple c++ smf midi file reader targeting linux (`amd64 arch`) and teensy (`32bit arm cortex m7 thumb arch`)  
+c++ midi file reader for linux (`amd64 arch`) and teensy (`32 bit arm cortex m7 thumb arch`)  
 
 ## contents:
 * [usage](#usage)
@@ -46,7 +46,7 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
 ```
 
 ## dependencies:
-* src (`32bit arm cortex m7 thumb arch`)  
+* src (`32 bit arm cortex m7 thumb arch`)  
   * [PaulStoffregen/cores](https://github.com/PaulStoffregen/cores)
   * [greiman/SdFat](https://github.com/greiman/SdFat)
   * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
