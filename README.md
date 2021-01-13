@@ -73,7 +73,7 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
   git clone https://github.com/newdigate/midi-smf-reader.git
   cd midi-smf-reader
   ```
-* compile example for linux:
+* compile src, tests
   ``` sh
   mkdir cmake-build-debug
   cd cmake-build-debug
