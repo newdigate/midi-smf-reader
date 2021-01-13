@@ -6,7 +6,7 @@
 
 simple c++ smf midi file reader targeting linux (`amd64 arch`) and teensy (`32bit arm cortex m7 thumb arch`)  
   
-## basic usage:
+## usage:
 ``` c++
 midireader reader;
 reader.open("1234.mid");
