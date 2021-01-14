@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(basic)
 
 set(CMAKE_CXX_STANDARD 11)
-include(../CMakeLists.include.txt)
+include(../CMakeLists.cmake.in)
 
 get_filename_component(CURRENT_FOLDER_NAME ${CMAKE_SOURCE_DIR} NAME)
 if(CURRENT_FOLDER_NAME STREQUAL "examples")
