@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "midireader.h"
 
-int main() {
+void setup() {
     midireader reader;
     reader.open("1234.mid");
 
@@ -32,4 +32,8 @@ int main() {
         }
         totalNumNotesRead += i;
     }
+}
+
+void loop() {
+    
 }
