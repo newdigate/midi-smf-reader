@@ -44,7 +44,8 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
   * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
   * [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI)
   * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
-      
+  * [teensy-cmake-marcos](https://github.com/newdigate/teensy-cmake-marcos)
+  
 * tests (`amd64 arch`)
   * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs)
     ``` sh
