@@ -1,13 +1,12 @@
 //
 // Created by Moolet on 31/12/2020.
 //
-#include <SD.h>
 
 #include <boost/test/unit_test.hpp>
+
 #include "default_test_fixture.h"
 #include "midireader.h"
-#define BOOST_TEST_MODULE MidiReaderTests
-#define BOOST_TEST_DYN_LINK
+
 BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
 
     unsigned char guitar2_mid[] = {

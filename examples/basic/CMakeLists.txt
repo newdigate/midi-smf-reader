@@ -1,15 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(basic)
-
-set(CMAKE_CXX_STANDARD 11)
-include(../CMakeLists.cmake.in)
-
-get_filename_component(CURRENT_FOLDER_NAME ${CMAKE_SOURCE_DIR} NAME)
-if(CURRENT_FOLDER_NAME STREQUAL "examples")
-  import_arduino_library(${CMAKE_SOURCE_DIR} ../src)
-else()
-    import_arduino_library(${CMAKE_SOURCE_DIR} ../../src)
-endif()
-
-teensy_add_executable(basic midiread.cpp)
-#set(CMAKE_VERBOSE_MAKEFILE 1)
+teensy_include_directories(../../src)
+teensy_add_executable(basic midiread.ino)
+teensy_target_link_libraries(basic midi_smf_reader SD SdFat SPI SerialFlash cores Wire)
+target_link_libraries(basic.o stdc++)

@@ -6,6 +6,7 @@
 #define MIDI_SMF_READER_DEFAULT_TEST_FIXTURE_H
 
 #include <Arduino.h>
+#include <SD.h>
 
 struct DefaultTestFixture
 {
