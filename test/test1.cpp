@@ -1,7 +1,6 @@
 //
 // Created by Moolet on 31/12/2020.
 //
-#include <SD.h>
 
 #define BOOST_TEST_MODULE BasicArduinoTests
 #define BOOST_TEST_DYN_LINK
