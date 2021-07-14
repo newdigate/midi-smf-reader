@@ -112,6 +112,9 @@ void midireader::readMetaText() {
 }
 
 bool midireader::read(midimessage &midiMessage) {
+    midiMessage.isTempoChange = false;
+    midiMessage.tempo = 0;
+
     if (_numTracks > 0
         && _current_track < _numTracks
         && _currentTrackOffset < _track_size[_current_track]) {
@@ -188,6 +191,7 @@ bool midireader::read(midimessage &midiMessage) {
                               midiMessage.channel + 1,
                               midiMessage.key, midiMessage.velocity);
                               */
+
                 return true;
             } else {
 
@@ -236,6 +240,10 @@ bool midireader::read(midimessage &midiMessage) {
                                     _currentBPM = bpm;
                                     Serial.printf("tempo : %f\n", bpm);
                                     _currentTrackOffset += 3;
+                                    midiMessage.delta_ticks = delta_ticks;
+                                    midiMessage.tempo = _currentBPM;
+                                    midiMessage.isTempoChange = true;
+                                    return true;
                                 }
                                 break;
                             }

@@ -2260,6 +2260,12 @@ BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
     };
     unsigned int guitar2_mid_len = 26962;
 
+    unsigned int get_microseconds_per_tick(double beats_per_minute) {
+        double micros_per_beat = 60000000.0 / beats_per_minute;
+        unsigned int micros_per_tick = micros_per_beat / 480;
+        return micros_per_tick;
+    }
+
     BOOST_FIXTURE_TEST_CASE(can_read_poly_midi_file, DefaultTestFixture) {
 
         SD.setSDCardFileData(reinterpret_cast<char *>(guitar2_mid), guitar2_mid_len);
@@ -2267,13 +2273,13 @@ BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
         midireader reader;
         reader.open("1234.mid");
 
-        double microsPerTick = reader.get_microseconds_per_tick();
+        double microsPerTick = get_microseconds_per_tick(120.0);
 
         int totalNumNotesRead = 0;
         for (int t = 0; t < reader.getNumTracks(); t++)
         {
             reader.setTrackNumber(t);
-            midimessage midiMessage{};
+            midimessage midiMessage {};
             int i = 0;
             long totalTicks = 0;
             long microseconds = 0;

@@ -7,6 +7,7 @@
 #include <vector>
 #include <functional>
 #include <algorithm>
+#include <Arduino.h>
 #include <SD.h>
 #include <string>
 
@@ -18,6 +19,9 @@ struct midimessage {
     unsigned char key;
     unsigned char velocity;
     unsigned char channel;
+    bool isTempoChange = false;
+    double tempo = 0.0;
+
 };
 
 class midireader {
@@ -41,19 +45,6 @@ public:
         return _numTracks;
     }
 
-    double getCurrentBPM() {
-        return _currentBPM;
-    }
-
-    unsigned int get_microseconds_per_tick(double beats_per_minute) {
-        double micros_per_beat = 60000000.0 / beats_per_minute;
-        unsigned int micros_per_tick = micros_per_beat / 480;
-        return micros_per_tick;
-    }
-
-    unsigned int get_microseconds_per_tick() {
-        return get_microseconds_per_tick(_currentBPM) ;
-    }
 private:
     bool _initialized;
     File _midifile;
