@@ -9,8 +9,8 @@ c++ standard midi file type-0 reader built for teensy (`32 bit arm cortex m7 thu
 ## contents:
 * [usage](#usage)
 * [dependencies](#dependencies)
-* [compile and install on linux](#compile-and-install-on-linux)
 * [compile example for teensy](#compile-example-for-teensy)
+* [compile and install on linux](#compile-and-install-on-linux)
 * [todo](#todo)
 * [credits](#credits)
 * [license](#license)
@@ -78,13 +78,40 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
     cd teensy-x86-stubs
     mkdir cmake-build-debug
     cd cmake-build-debug
-    cmake ..
+    cmake .. 
     sudo make install
     ```
   * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
     ``` sh
     sudo apt-get update && sudo apt-get install -yq libboost-test-dev
     ```
+
+## compile example for teensy:
+* download [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
+* clone src dependencies into a directory (in this case `/Users/me/git`)
+``` sh
+mkdir /Users/me/git
+cd /Users/me/git
+git clone https://github.com/PaulStoffregen/cores
+git clone https://github.com/greiman/SdFat
+git clone -b Juse_Use_SdFat https://github.com/PaulStoffregen/SD
+git clone https://github.com/PaulStoffregen/SPI
+```
+
+* update *COMPILERPATH*, *DEPSPATH* in `cmake/toolchains/teensy41.toolchain.cmake:`
+``` cmake
+set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
+set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
+```
+
+* run these commands in a terminal from the root repository directory
+``` sh
+mkdir cmake-build-debug
+cd cmake-build-debug
+cmake .. -DCMAKE_TOOLCHAIN_FILE:FILEPATH="../cmake/toolchains/teensy41.toolchain.cmake"
+make 
+```
+
 ## compile and install on linux      
 * clone:
   ``` sh
@@ -95,7 +122,7 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
   ``` sh
   mkdir cmake-build-debug
   cd cmake-build-debug
-  cmake ..
+  cmake .. 
   make
   ```
 * run tests
@@ -110,32 +137,6 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
   ``` sh
   sudo make uninstall
   ```
-  
-## compile example for teensy:
-* download [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
-* clone src dependencies into a directory (in this case `/Users/me/git`)
-``` sh
-mkdir /Users/me/git
-cd /Users/me/git
-git clone https://github.com/PaulStoffregen/cores
-git clone https://github.com/greiman/SdFat
-git clone -b Juse_Use_SdFat https://github.com/PaulStoffregen/SD
-git clone https://github.com/PaulStoffregen/SPI
-```
-
-* update *COMPILERPATH*, *DEPSPATH* in `examples/CMakeLists.include.txt:`
-``` cmake
-set(COMPILERPATH "/Applications/ARM/bin/")   # should point to folder with GCC-ARM-NONE-EABI executables
-set(DEPSPATH "/Users/me/git")                # path with 4 x src dependencies 
-```
-
-* run these commands in a terminal from the root repository directory
-``` sh
-cd examples/basic
-mkdir cmake-build-debug
-cd cmake-build-debug
-cmake .. 
-```
 
 ## todo:
 * read tempo / key changes
