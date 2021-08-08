@@ -34,7 +34,7 @@ jobs:
           path: teensy-x86-sd-stubs
 
       - name: download dependencies
-        run: sudo apt-get update && sudo apt-get install -yq libboost-test-dev
+        run: sudo apt-get update && sudo apt-get install -yq libboost-test-dev libxml2-utils xsltproc
 
       - name: Make and Install Dependencies
         run: cd teensy-x86-stubs && mkdir cmake-build-$BUILD_TYPE && cd cmake-build-$BUILD_TYPE && cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE .. && sudo make install
@@ -63,16 +63,25 @@ jobs:
         # Execute the build.  You can specify a specific target with "--target <NAME>"
         run: cmake --build . --config $BUILD_TYPE
       
-      - name: ls
-        working-directory: ${{github.workspace}}/build
+      - name: Test
+        working-directory: ${{github.workspace}}
         shell: bash
         # Execute the build.  You can specify a specific target with "--target <NAME>"
         run: |
-          ls -lrt
-          pwd
+          mkdir output
+          build/test/midi_smf_reader_test --output_format=XML --report_level=detailed  2> output/test-results.xml
+          xmllint --format output/test-results.xml > output/test-results-formatted.xml
+          xsltproc test/boost-to-junit-xml.xslt output/test-results.xml > output/junit-test-results.xml
 
-      - name: Test
-        working-directory: ${{github.workspace}}/build
-        shell: bash
-        # Execute the build.  You can specify a specific target with "--target <NAME>"
-        run: test/midi_smf_reader_test
+      - name: upload artifacts
+        if: always()      
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results
+          path: output
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: output/junit-test-results.xml
