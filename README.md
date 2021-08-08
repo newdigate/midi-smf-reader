@@ -4,7 +4,7 @@
 [![Ubuntu-x64](https://github.com/newdigate/midi-smf-reader/workflows/Ubuntu-x64/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3AUbuntu-x64)
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3Ateensy40)
 
-c++ standard midi file type-0 reader for built for teensy (`32 bit arm cortex m7 thumb arch`)  
+c++ standard midi file type-0 reader built for teensy (`32 bit arm cortex m7 thumb arch`)  
 
 ## contents:
 * [usage](#usage)
