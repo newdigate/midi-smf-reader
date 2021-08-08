@@ -1,10 +1,10 @@
-# midi smf reader
+# standard midi file reader for teensy
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![CMake](https://img.shields.io/badge/project-CMake-brightgreen.svg?label=built%20with&colorA=555555&colorB=8a8fff&logo=)](CMakelists.txt)
 [![Ubuntu-x64](https://github.com/newdigate/midi-smf-reader/workflows/Ubuntu-x64/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3AUbuntu-x64)
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3Ateensy40)
 
-c++ midi file reader for linux (`amd64 arch`) and teensy (`32 bit arm cortex m7 thumb arch`)  
+c++ standard midi file type-0 reader for built for teensy (`32 bit arm cortex m7 thumb arch`)  
 
 ## contents:
 * [usage](#usage)
