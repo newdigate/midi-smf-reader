@@ -97,7 +97,7 @@ void midireader::close() {
       _midifile.close();
 }
 
-void midireader::readMetaText() {
+smfmetatextmessage* midireader::readMetaText(unsigned int delta_ticks, byte textType) {
     uint16_t progress = 0;
     uint32_t length = varfieldGet(_midifile, progress);
     _currentTrackOffset += progress;
@@ -107,14 +107,13 @@ void midireader::readMetaText() {
     Serial.printf("text: ");
     Serial.print(text);
     Serial.println();
-    delete[] text;
     _currentTrackOffset += length;
+
+    smfmetatextmessage* textMessage = new smfmetatextmessage(delta_ticks, text, textType );
+    return textMessage;
 }
 
-bool midireader::read(midimessage &midiMessage) {
-    midiMessage.isTempoChange = false;
-    midiMessage.tempo = 0;
-
+smfmidimessage* midireader::read() {
     if (_numTracks > 0
         && _current_track < _numTracks
         && _currentTrackOffset < _track_size[_current_track]) {
@@ -126,7 +125,7 @@ bool midireader::read(midimessage &midiMessage) {
             uint16_t progress = 0;
             uint32_t delta_ticks = varfieldGet(_midifile, progress);
             if (progress == 0)
-                return false;
+                return nullptr;
             _currentTrackOffset += progress;
 
             unsigned char new_status_byte[1];
@@ -178,21 +177,8 @@ bool midireader::read(midimessage &midiMessage) {
                 } else
                     velocity = 0;
 
-                midiMessage.status = status_byte;
-                midiMessage.delta_ticks = delta_ticks;
-                midiMessage.key = key;
-                midiMessage.velocity = velocity;
-                midiMessage.channel = channel;
-
-                /*
-                Serial.printf("delta: 0x%04x (%04d) \t\t\tst:(%02x): %s \t\t\t ch:%02d \tkey:%03d \tvel:%03d\n",
-                              midiMessage.delta_ticks, midiMessage.delta_ticks,
-                              midiMessage.status, voice_message_status_name(midiMessage.status),
-                              midiMessage.channel + 1,
-                              midiMessage.key, midiMessage.velocity);
-                              */
-
-                return true;
+                smfchannelvoicemessage* channelVoiceMessage = new smfchannelvoicemessage(delta_ticks, status_byte | channel, key, velocity );
+                return channelVoiceMessage;
             } else {
 
                 switch (status_byte) {
@@ -204,8 +190,11 @@ bool midireader::read(midimessage &midiMessage) {
                         char *sysex = new char[length+1];
                         sysex[length] = 0;
                         _midifile.read(sysex, length);
+
                         _currentTrackOffset += length;
-                        break;
+                        smfsysexmessage *result = new smfsysexmessage(delta_ticks, sysex);
+
+                        return result;
                     }
 
                     case 0xFF : {
@@ -217,14 +206,18 @@ bool midireader::read(midimessage &midiMessage) {
                                 uint8_t sequence_number = _midifile.read();
                                 _currentTrackOffset++;
                                 Serial.printf("sequence number: %d\n", sequence_number);
-                                break;
+
+                                smfsequencenumbermessage *seqNum = new smfsequencenumbermessage(delta_ticks, sequence_number );
+                                return seqNum;
                             }              
                             case 0x2F: {
                                 // End of Track -> FF 2F 00
                                 uint8_t nn = _midifile.read();
                                 Serial.printf("end of track\n");
                                 _currentTrackOffset++;
-                                break;
+
+                                smfendoftrackmessage *endOfTrackMessage = new smfendoftrackmessage(delta_ticks, nn );
+                                return endOfTrackMessage;
                             }
                             case 0x51: {
                                 // FF 51 03 tttttt Set Tempo
@@ -235,15 +228,10 @@ bool midireader::read(midimessage &midiMessage) {
                                     uint8_t nn = _midifile.read();
                                     uint8_t dd = _midifile.read(); // denomiator = 2^dd
                                     uint8_t cc = _midifile.read(); //
-                                    uint64_t microseconds_per_quarter_note = nn << 16 | dd << 8 | cc;
-                                    double bpm = 60000000 / microseconds_per_quarter_note;
-                                    _currentBPM = bpm;
-                                    Serial.printf("tempo : %f\n", bpm);
-                                    _currentTrackOffset += 3;
-                                    midiMessage.delta_ticks = delta_ticks;
-                                    midiMessage.tempo = _currentBPM;
-                                    midiMessage.isTempoChange = true;
-                                    return true;
+                                    unsigned int microseconds_per_quarter_note = nn << 16 | dd << 8 | cc;
+                                    smfsettempomessage *tempoMessage = new smfsettempomessage(delta_ticks, microseconds_per_quarter_note);
+
+                                    return tempoMessage;
                                 }
                                 break;
                             }
@@ -259,6 +247,8 @@ bool midireader::read(midimessage &midiMessage) {
                                     uint8_t ff = _midifile.read();
                                     Serial.printf("SMPTE Offset : %02d:%02d:%02d:%02d:%02d\n", hr, mn, se, fr, ff);
                                     _currentTrackOffset += 5;
+                                    smfsmpteoffsetmessage *offsetMessage = new smfsmpteoffsetmessage(delta_ticks, hr, mn, se, fr, ff);
+                                    return offsetMessage;
                                 }
 
                                 break;
@@ -276,6 +266,8 @@ bool midireader::read(midimessage &midiMessage) {
                                     uint8_t denominator = 2 ^dd;
                                     _currentTrackOffset += 4;
                                     Serial.printf("Time Signature: %d / %d, %d %d\n", nn, denominator, cc, bb);
+                                    smftimesignaturemessage *timeSigMessage = new smftimesignaturemessage(delta_ticks, nn, dd, cc, bb);
+                                    return timeSigMessage;
                                 }
                                 break;
                             }
@@ -291,6 +283,8 @@ bool midireader::read(midimessage &midiMessage) {
 
                                     _currentTrackOffset += 2;
                                     Serial.printf("Key Signature: %d %d\n", sf, mi);
+                                    smfkeysignaturemessage *keySigMessage = new smfkeysignaturemessage(delta_ticks, sf, mi);
+                                    return keySigMessage;
                                 }
                                 break;
                             }
@@ -316,7 +310,7 @@ bool midireader::read(midimessage &midiMessage) {
 
                             default: {
                                 if ((nextByte >= 1) && (nextByte < 8))
-                                    readMetaText();
+                                    return readMetaText(delta_ticks, nextByte);
                                 else {
                                     uint8_t nn = _midifile.read();
                                     _currentTrackOffset++;
@@ -344,7 +338,7 @@ bool midireader::read(midimessage &midiMessage) {
             }
         }
     }
-    return false;
+    return nullptr;
 }
 
 uint32_t varfieldGet(File &file, uint16_t &progress)

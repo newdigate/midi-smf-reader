@@ -13,15 +13,96 @@
 
 using namespace std;
 
-struct midimessage {
-    uint32_t delta_ticks;
-    unsigned char status;
-    unsigned char key;
-    unsigned char velocity;
-    unsigned char channel;
-    bool isTempoChange = false;
-    double tempo = 0.0;
 
+struct smfmidimessage {
+    uint32_t delta_ticks;
+    smfmidimessage() : delta_ticks(0) {};
+    smfmidimessage(uint32_t deltaticks) : delta_ticks(deltaticks) {};
+};
+
+struct smfchannelvoicemessage : smfmidimessage {
+    smfchannelvoicemessage() : smfmidimessage(), status(0), data1(0), data2(0), data3(0) {} ;
+
+    smfchannelvoicemessage( uint32_t delta_ticks, byte st, byte d1, byte d2) : smfmidimessage(delta_ticks), status(st), data1(d1), data2(d2) {} ;
+    
+    smfchannelvoicemessage( uint32_t delta_ticks, byte st, byte d1, byte d2, byte d3) : smfmidimessage(delta_ticks), status(st), data1(d1), data2(d2), data3(d3) {} ;
+
+    byte status;
+    byte data1;
+    byte data2;
+    byte data3;
+    byte channel;
+};
+
+struct smfkeysignaturemessage : smfmidimessage {
+    smfkeysignaturemessage() : smfmidimessage(), sf(0), mi(0) {} ;
+
+    smfkeysignaturemessage( uint32_t delta_ticks, byte sf, byte mi) : smfmidimessage(delta_ticks), sf(sf), mi(mi) {} ;
+    
+    byte sf;
+    byte mi;
+};
+
+struct smftimesignaturemessage : smfmidimessage {
+    smftimesignaturemessage() : smfmidimessage(), nn(0), dd(0), cc(0), bb(0) {} ;
+
+    smftimesignaturemessage( uint32_t delta_ticks, byte nn, byte dd, byte cc, byte bb) : smfmidimessage(delta_ticks), nn(nn), dd(dd), cc(cc), bb(bb) {} ;
+        
+    byte nn;
+    byte dd;
+    byte cc;
+    byte bb; 
+};
+
+struct smfsmpteoffsetmessage : smfmidimessage {
+    smfsmpteoffsetmessage() : smfmidimessage(), hr(0), mn(0), se(0), fr(0), ff(0) {} ;
+
+    smfsmpteoffsetmessage( uint32_t delta_ticks, byte hr, byte mn, byte se, byte fr, byte ff) : smfmidimessage(delta_ticks), hr(hr), mn(mn), se(se), fr(fr), ff(ff) {} ;
+        
+     byte hr;
+     byte mn;
+     byte se;
+     byte fr;
+     byte ff;
+};
+
+struct smfsettempomessage : smfmidimessage {
+   smfsettempomessage() : smfmidimessage(), microseconds_per_quarter_note(120 * 60000000) {}
+
+   smfsettempomessage( uint32_t delta_ticks, unsigned int microseconds_per_quarter_note) : smfmidimessage(delta_ticks), microseconds_per_quarter_note(microseconds_per_quarter_note) {};     
+
+   smfsettempomessage( uint32_t delta_ticks, double tempo) : smfmidimessage(delta_ticks), microseconds_per_quarter_note(tempo * 60000000) {};     
+
+   unsigned int microseconds_per_quarter_note;
+
+   double getTempo() {
+     return 60000000.0 / (double)microseconds_per_quarter_note;
+   }
+};
+
+struct smfendoftrackmessage : smfmidimessage {
+    smfendoftrackmessage() : smfmidimessage(), trackNumber(0) {} ;    
+    smfendoftrackmessage( uint32_t delta_ticks, byte trackNumber) : smfmidimessage(delta_ticks), trackNumber(trackNumber) {};     
+    byte trackNumber;
+};
+
+struct smfsequencenumbermessage : smfmidimessage {
+    smfsequencenumbermessage() : smfmidimessage(), sequenceNumber(0) {} ;    
+    smfsequencenumbermessage( uint32_t delta_ticks, byte sequenceNumber) : smfmidimessage(delta_ticks), sequenceNumber(sequenceNumber) {};     
+    byte sequenceNumber;
+};
+
+struct smfsysexmessage : smfmidimessage {
+    smfsysexmessage() : smfmidimessage(), data(nullptr) {} ;    
+    smfsysexmessage( uint32_t delta_ticks, char *data) : smfmidimessage(delta_ticks), data(data) {};     
+    char *data;    
+    
+};
+struct smfmetatextmessage : smfmidimessage {
+    smfmetatextmessage() : smfmidimessage(), text(nullptr), textType(01) {} ;    
+    smfmetatextmessage( uint32_t delta_ticks, char *text, byte textType) : smfmidimessage(delta_ticks), text(text), textType(textType) {};     
+    char *text;   
+    byte textType;
 };
 
 class midireader {
@@ -39,7 +120,7 @@ public:
     bool open(const char* filename);
     void close();
     bool setTrackNumber(unsigned char trackNumber);
-    bool read(midimessage &midiMessage);
+    smfmidimessage* read();
 
     unsigned getNumTracks() {
         return _numTracks;
@@ -64,7 +145,7 @@ private:
     vector<unsigned long> _track_offset;
     unsigned char status_byte = 0;
 
-    void readMetaText();
+    smfmetatextmessage* readMetaText(unsigned int delta_ticks, byte textType);
 
     const char * voice_message_status_name(unsigned char status);
 };
