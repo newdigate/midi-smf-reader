@@ -139,7 +139,7 @@ make
   ```
 
 ## todo:
-* read tempo / key changes
+* ~~read tempo / key changes~~ done
 
 ## credits
 ##### Don't Run Unit Tests on the Arduino Device or Emulator
