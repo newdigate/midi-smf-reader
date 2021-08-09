@@ -228,7 +228,7 @@ smfmidimessage* midireader::read() {
                                     uint8_t nn = _midifile.read();
                                     uint8_t dd = _midifile.read(); // denomiator = 2^dd
                                     uint8_t cc = _midifile.read(); //
-                                    unsigned int microseconds_per_quarter_note = nn << 16 | dd << 8 | cc;
+                                    unsigned long microseconds_per_quarter_note = nn << 16 | dd << 8 | cc;
                                     smfsettempomessage *tempoMessage = new smfsettempomessage(delta_ticks, microseconds_per_quarter_note);
 
                                     return tempoMessage;

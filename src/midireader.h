@@ -103,9 +103,9 @@ struct smfsmpteoffsetmessage : smfmidimessage {
 };
 
 struct smfsettempomessage : smfmidimessage {
-    smfsettempomessage() : smfmidimessage(), microseconds_per_quarter_note(120 * 60000000) {}
+    smfsettempomessage() : smfmidimessage(), microseconds_per_quarter_note(60000000 / 120) {}
 
-    smfsettempomessage( uint32_t delta_ticks, unsigned int microseconds_per_quarter_note) : smfmidimessage(delta_ticks), microseconds_per_quarter_note(microseconds_per_quarter_note) {};     
+    smfsettempomessage( uint32_t delta_ticks, unsigned long microseconds_per_quarter_note) : smfmidimessage(delta_ticks), microseconds_per_quarter_note(microseconds_per_quarter_note) {};     
 
     smfsettempomessage( uint32_t delta_ticks, double tempo) : smfmidimessage(delta_ticks), microseconds_per_quarter_note(tempo * 60000000) {};     
     
@@ -116,7 +116,7 @@ struct smfsettempomessage : smfmidimessage {
         return smfmessagetype::smftype_settempomessage;
     }
 
-    unsigned int microseconds_per_quarter_note;
+    unsigned long microseconds_per_quarter_note;
 
     double getTempo() {
         return 60000000.0 / (double)microseconds_per_quarter_note;
