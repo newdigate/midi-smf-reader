@@ -23,7 +23,6 @@ double microsPerTick = reader.get_microseconds_per_tick();
 int totalNumNotesRead = 0;
 for (int t = 0; t < reader.getNumTracks(); t++) {
     reader.setTrackNumber(t);
-    midimessage midiMessage{};
     int i = 0;
     long totalTicks = 0, microseconds = 0;
     smfmidimessage *message;
