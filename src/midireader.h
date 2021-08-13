@@ -51,7 +51,10 @@ struct smfchannelvoicemessage : smfmidimessage {
     byte data1;
     byte data2;
     byte data3;
-    byte channel;
+    
+    byte getChannel() {
+        return status & 0x0F;
+    }
 };
 
 struct smfkeysignaturemessage : smfmidimessage {

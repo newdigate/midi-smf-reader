@@ -377,6 +377,9 @@ bool midireader::setTrackNumber(unsigned char trackNumber) {
         _midifile.seek(_track_offset[trackNumber]);
         _currentTrackOffset = 0;
         _current_track = trackNumber;
-    } else return false;
+    } else {
+        Serial.printf("track not found %d\n", trackNumber);
+        return false;
+    }
     return false;
 }
