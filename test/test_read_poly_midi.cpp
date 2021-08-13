@@ -2265,7 +2265,6 @@ BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
         unsigned int micros_per_tick = micros_per_beat / 480;
         return micros_per_tick;
     }
-
     BOOST_FIXTURE_TEST_CASE(can_read_poly_midi_file, DefaultTestFixture) {
 
         SD.setSDCardFileData(reinterpret_cast<char *>(guitar2_mid), guitar2_mid_len);
@@ -2290,7 +2289,7 @@ BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
                 switch(message->getMessageType()) {
                     case smftype_channelvoicemessage : {
                         smfchannelvoicemessage *channelvoicemessage = (smfchannelvoicemessage *)message;
-                        printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tdata1: %3d\tdata2: %3d\tdata3: %2d\t\n",
+                        printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tdata1: %3d\tdata2: %3d\n",
                             microseconds/1000,
                             t,
                             i,
@@ -2298,8 +2297,7 @@ BOOST_AUTO_TEST_SUITE(basic_midi_read_poly_test)
                             channelvoicemessage->delta_ticks,
                             channelvoicemessage->status,
                             channelvoicemessage->data1,
-                            channelvoicemessage->data2,
-                            channelvoicemessage->data3);
+                            channelvoicemessage->data2);
                         break; 
                     }
                     

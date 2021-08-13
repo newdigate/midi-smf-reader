@@ -34,11 +34,11 @@ struct smfmidimessage {
 };
 
 struct smfchannelvoicemessage : smfmidimessage {
-    smfchannelvoicemessage() : smfmidimessage(), status(0), data1(0), data2(0), data3(0) {} ;
+    smfchannelvoicemessage() : smfmidimessage(), status(0), data1(0), data2(0) {} ;
 
     smfchannelvoicemessage( uint32_t delta_ticks, byte st, byte d1, byte d2) : smfmidimessage(delta_ticks), status(st), data1(d1), data2(d2) {} ;
     
-    smfchannelvoicemessage( uint32_t delta_ticks, byte st, byte d1, byte d2, byte d3) : smfmidimessage(delta_ticks), status(st), data1(d1), data2(d2), data3(d3) {} ;
+    //smfchannelvoicemessage( uint32_t delta_ticks, byte st, byte d1, byte d2, byte d3) : smfmidimessage(delta_ticks), status(st), data1(d1), data2(d2), data3(d3) {} ;
 
     ~smfchannelvoicemessage() override {
     }
@@ -50,8 +50,8 @@ struct smfchannelvoicemessage : smfmidimessage {
     byte status;
     byte data1;
     byte data2;
-    byte data3;
-    
+    //byte data3;
+
     byte getChannel() {
         return status & 0x0F;
     }
