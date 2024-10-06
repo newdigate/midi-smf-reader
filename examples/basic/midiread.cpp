@@ -3,8 +3,10 @@
 
 void setup() {
     midireader reader;
-    reader.open("1234.mid");
+    //reader.open("/Users/moolet/Development/github/newdigate/midi-smf-writer/cmake-build-debug/test10.mid");
+    reader.open("/Users/moolet/Development/github/samd21g-midi-tool-software/resources/sd/test23.mid");
 
+    //reader.open("/Users/moolet/Music/Logic/test7logic.mid");
     double microsPerTick = reader.get_microseconds_per_tick();
 
     int totalNumNotesRead = 0;
@@ -22,7 +24,7 @@ void setup() {
                 switch(message->getMessageType()) {
                     case smftype_channelvoicemessage : {
                         smfchannelvoicemessage *channelvoicemessage = (smfchannelvoicemessage *)message;
-                        printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tdata1: %3d\tdata2: %3d\tdata3: %2d\t\n",
+                        printf("%5d: [%2d,%4d]: %6d: delta: %3d\tstatus: 0x%2x\tdata1: %3d\tdata2: %3d\t\n",
                             microseconds/1000,
                             t,
                             i,
@@ -30,8 +32,7 @@ void setup() {
                             channelvoicemessage->delta_ticks,
                             channelvoicemessage->status,
                             channelvoicemessage->data1,
-                            channelvoicemessage->data2,
-                            channelvoicemessage->data3);
+                            channelvoicemessage->data2);
                         break; 
                     }
                     
@@ -40,7 +41,8 @@ void setup() {
                         break;
                     }
 
-                    default: 
+                    default:
+                        printf("unhandled message type: %d\n",message->getMessageType());
                         break;
                 }
 
@@ -54,3 +56,10 @@ void setup() {
 void loop() {
     
 }
+
+//#ifdef BUILD_FOR_LINUX
+int main(int, char**) {
+    setup();
+    //while(true) loop();
+}
+//#endif

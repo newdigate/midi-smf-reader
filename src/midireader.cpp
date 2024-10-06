@@ -52,16 +52,19 @@ bool midireader::open(const char *filename) {
 
     _midifile.read(buffer, 2);
     header.format = static_cast<uint16_t>(buffer[0] << 8 | buffer[1]);
+    printf("format: %x\r\n", header.format);
 
     _midifile.read(buffer, 2);
     header.num_tracks = static_cast<uint16_t>(buffer[0] << 8 | buffer[1]);
+    printf("num tracks: %x\r\n", header.num_tracks);
 
     _midifile.read(buffer, 2);
     header.division = static_cast<uint16_t>(buffer[0] << 8 | buffer[1]);
+    printf("division: %x\r\n", header.division);
 
     if ((buffer[0] & 0x80) == 0x80) {
         _ticks_per_quarter_note = header.division;
-        Serial.printf("ticks per quarter note: %d\r\n", _ticks_per_quarter_note);
+        printf("ticks per quarter note: %d\r\n", _ticks_per_quarter_note);
     }
 
     for (uint16_t i = 0; i < header.num_tracks; i++) {
@@ -72,7 +75,7 @@ bool midireader::open(const char *filename) {
 
         _midifile.read(buffer, 4);
         auto track_length = static_cast<unsigned long>(buffer[0] << 24 | buffer[1] << 16 | buffer[2] << 8 | buffer[3]);;
-
+        Serial.printf("Track length :%d\n", track_length);
         _track_offset.push_back(_midifile.position());
         _track_size.push_back(track_length);
         _midifile.seek(_track_offset[i] + track_length);
