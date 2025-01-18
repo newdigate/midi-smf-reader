@@ -203,7 +203,7 @@ public:
 
     unsigned int get_microseconds_per_tick() {
         double micros_per_beat = 60000000.0 / _currentBPM;
-        unsigned int micros_per_tick = micros_per_beat / 480;
+        unsigned int micros_per_tick = micros_per_beat / _ticks_per_quarter_note;
         return micros_per_tick;
     }
 
@@ -211,7 +211,7 @@ private:
     bool _initialized;
     File _midifile;
     char* _filename;
-    unsigned _ticks_per_quarter_note;
+    unsigned _ticks_per_quarter_note = 480;
     double _currentBPM = 120.0;
     int _current_track = -1;
     unsigned _currentTrackOffset = 0;
