@@ -62,7 +62,7 @@ bool midireader::open(const char *filename) {
     header.division = static_cast<uint16_t>(buffer[0] << 8 | buffer[1]);
     printf("division: %x\r\n", header.division);
 
-    if ((buffer[0] & 0x80) == 0x80) {
+    if ((buffer[0] & 0x80) == 0x00) {
         _ticks_per_quarter_note = header.division;
         printf("ticks per quarter note: %d\r\n", _ticks_per_quarter_note);
     }
