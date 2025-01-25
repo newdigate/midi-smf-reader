@@ -127,7 +127,7 @@ make
   mkdir cmake-build-debug
   cd cmake-build-debug
   cmake -DBUILD_EXAMPLES=On -DBUILD_TESTS=On .. 
-  make
+  cmake --build .
   ```
 * run tests
   ``` sh
