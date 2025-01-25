@@ -4,7 +4,7 @@
 [![Ubuntu-x64](https://github.com/newdigate/midi-smf-reader/workflows/Ubuntu-x64/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3AUbuntu-x64)
 [![teensy40](https://github.com/newdigate/midi-smf-reader/workflows/teensy40/badge.svg)](https://github.com/newdigate/midi-smf-reader/actions?query=workflow%3Ateensy40)
 
-c++ standard midi file type-0 reader built for teensy (`32 bit arm cortex m7 thumb arch`)  
+c++ standard midi file type-0 reader built for arduino/teensy/linux (`32 bit arm cortex m7 thumb arch`)  
 
 ## contents:
 * [usage](#usage)
@@ -68,16 +68,9 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
 
 ## dependencies:
 * src (`32 bit arm cortex m7 thumb arch`)  
-  * [PaulStoffregen/cores](https://github.com/PaulStoffregen/cores)
-  * [PaulStoffregen/SdFat](https://github.com/PaulStoffregen/SdFat)
-  * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
-  * [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI)
-  * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
-  * [teensy-cmake-marcos](https://github.com/newdigate/teensy-cmake-marcos)
+[PaulStoffregen/cores](https://github.com/PaulStoffregen/cores) [PaulStoffregen/SdFat](https://github.com/PaulStoffregen/SdFat) [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD) [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI) [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) [teensy-cmake-marcos](https://github.com/newdigate/teensy-cmake-marcos)
   
 * tests (`run on linux/x86/x64`)
-  * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs) (CMake will use git to pull this dependency)
-  * [teensy-x86-sd-stubs](https://github.com/newdigate/teensy-x86-sd-stubs) (CMake will use git to pull this dependency)
   * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
     ``` sh
     sudo apt-get update && sudo apt-get install -yq libboost-test-dev
