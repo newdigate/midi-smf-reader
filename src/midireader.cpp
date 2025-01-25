@@ -82,7 +82,6 @@ bool midireader::open(const char *filename) {
         _numTracks++;
     }
 
-    _ticks_per_quarter_note = header.division;
     if (_track_offset.size() > 0) {
         _current_track = 0;
         _midifile.seek(_track_offset[0]);
