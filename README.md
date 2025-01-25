@@ -64,7 +64,7 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
 ## dependencies:
 * src (`32 bit arm cortex m7 thumb arch`)  
   * [PaulStoffregen/cores](https://github.com/PaulStoffregen/cores)
-  * [greiman/SdFat](https://github.com/greiman/SdFat)
+  * [PaulStoffregen/SdFat](https://github.com/PaulStoffregen/SdFat)
   * [PaulStoffregen/SD @ Juse_Use_SdFat](https://github.com/PaulStoffregen/SD)
   * [PaulStoffregen/SPI](https://github.com/PaulStoffregen/SPI)
   * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
