@@ -117,11 +117,11 @@ make
   git clone https://github.com/newdigate/midi-smf-reader.git
   cd midi-smf-reader
   ```
-* compile src, tests
+* compile src, examples tests
   ``` sh
   mkdir cmake-build-debug
   cd cmake-build-debug
-  cmake .. 
+  cmake -DBUILD_EXAMPLES=On -DBUILD_TESTS=On .. 
   make
   ```
 * run tests
