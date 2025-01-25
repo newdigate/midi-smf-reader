@@ -92,7 +92,7 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
 mkdir /Users/me/git
 cd /Users/me/git
 git clone https://github.com/PaulStoffregen/cores
-git clone https://github.com/greiman/SdFat
+git clone https://github.com/PaulStoffregen/SdFat
 git clone -b Juse_Use_SdFat https://github.com/PaulStoffregen/SD
 git clone https://github.com/PaulStoffregen/SPI
 ```
@@ -127,14 +127,6 @@ make
 * run tests
   ``` sh
   test/midi_smf_reader_test
-  ```
-* install library for linux: 
-  ``` sh
-  sudo make install
-  ```
-* uninstall library for linux: 
-  ``` sh
-  sudo make uninstall
   ```
 
 ## todo:
