@@ -16,6 +16,8 @@ c++ standard midi file type-0 reader built for teensy (`32 bit arm cortex m7 thu
 * [license](#license)
   
 ## usage:
+<details>
+
 ``` c++
 midireader reader;
 reader.open("1234.mid");
@@ -60,6 +62,9 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
     totalNumNotesRead += i;
 }
 ```
+
+</details>
+
 
 ## dependencies:
 * src (`32 bit arm cortex m7 thumb arch`)  
