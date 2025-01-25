@@ -75,22 +75,17 @@ for (int t = 0; t < reader.getNumTracks(); t++) {
   * [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
   * [teensy-cmake-marcos](https://github.com/newdigate/teensy-cmake-marcos)
   
-* tests (`amd64 arch`)
-  * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs)
-    ``` sh
-    git clone https://github.com/newdigate/teensy-x86-stubs.git
-    cd teensy-x86-stubs
-    mkdir cmake-build-debug
-    cd cmake-build-debug
-    cmake .. 
-    sudo make install
-    ```
+* tests (`run on linux/x86/x64`)
+  * [teensy_x86_stubs](https://github.com/newdigate/teensy-x86-stubs) (CMake will use git to pull this dependency)
+  * [teensy-x86-sd-stubs](https://github.com/newdigate/teensy-x86-sd-stubs) (CMake will use git to pull this dependency)
   * [libboost-test-dev](https://www.boost.org/doc/libs/1_63_0/libs/test/doc/html/index.html)
     ``` sh
     sudo apt-get update && sudo apt-get install -yq libboost-test-dev
     ```
 
 ## compile example for teensy:
+<details>
+
 * download [gcc-arm-none-eabi](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
 * clone src dependencies into a directory (in this case `/Users/me/git`)
 ``` sh
@@ -116,7 +111,12 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE:FILEPATH="../cmake/toolchains/teensy41.toolchain
 make 
 ```
 
-## compile and install on linux      
+</details>
+
+
+## compile and install on linux
+<details>
+
 * clone:
   ``` sh
   git clone https://github.com/newdigate/midi-smf-reader.git
@@ -133,6 +133,8 @@ make
   ``` sh
   test/midi_smf_reader_test
   ```
+
+</details>
 
 ## todo:
 * ~~read tempo / key changes~~ done
