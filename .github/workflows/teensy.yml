@@ -8,6 +8,11 @@ on:
       - '.gitignore'
       - 'test/**'
       - '.github/workflows/ubuntu_x64_cmake.yml'
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
 jobs:
   build:
 
@@ -15,39 +20,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - uses: actions/checkout@v2
-      with:
-        repository: newdigate/teensy-cmake-macros
-        path: deps/teensy-cmake-macros
-
-    - uses: actions/checkout@v2
-      with:
-        repository: PaulStoffregen/cores.git
-        path: deps/cores
-        fetch-depth: 1
-        ref: master
-
-    - uses: actions/checkout@v2
-      with:
-        repository: PaulStoffregen/SD.git
-        path: deps/SD
-        fetch-depth: 1
-        ref: Juse_Use_SdFat
-
-    - uses: actions/checkout@v2
-      with:
-        repository: PaulStoffregen/SdFat.git
-        path: deps/SdFat
-        fetch-depth: 1
-        ref: master
-
-    - uses: actions/checkout@v2
-      with:
-        repository: PaulStoffregen/SPI.git
-        path: deps/SPI
-        fetch-depth: 1
-        ref: master
 
     - name: download toolchain
       run: |
@@ -57,9 +29,23 @@ jobs:
         tar xjf /tmp/gcc-arm-none-eabi.tar.bz2
         rm /tmp/gcc-arm-none-eabi.tar.bz2
         echo "/opt/gcc-arm-none-eabi-9-2019-q4-major/bin"
+    - name: Create Build Environment
+      # Some projects don't allow in-source building, so create a separate build directory
+      # We'll use this as our working directory for all subsequent commands
+      run: cmake -E make_directory ${{github.workspace}}/build
 
-    - name: install teensy-cmake-macros
-      run: cd deps/teensy-cmake-macros && mkdir cmake-build-debug && cd cmake-build-debug && cmake -DCMAKE_BUILD_TYPE=Debug .. && sudo make install
+    - name: Configure CMake
+      # Use a bash shell so we can use the same syntax for environment variable
+      # access regardless of the host operating system
+      shell: bash
+      working-directory: ${{github.workspace}}/build
+      # Note the current convention is to use the -S and -B options here to specify source
+      # and build directories, but this is only available with CMake 3.13 and higher.
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_TESTS=On -DBUILD_EXAMPLES=On -DCMAKE_TOOLCHAIN_FILE:FILEPATH="../cmake/toolchains/teensy41.cmake"
 
-    - name: build
-      run: mkdir cmake-build-debug && cd cmake-build-debug && cmake -DCMAKE_TOOLCHAIN_FILE:FILEPATH="../cmake/toolchains/teensy41.toolchain.cmake" -DCMAKE_BUILD_TYPE=Debug .. && make
+    - name: Build
+      working-directory: ${{github.workspace}}/build
+      shell: bash
+      # Execute the build.  You can specify a specific target with "--target <NAME>"
+      run: cmake --build . --config $BUILD_TYPE
